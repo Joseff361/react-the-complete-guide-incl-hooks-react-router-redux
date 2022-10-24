@@ -1,29 +1,31 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { counterActions } from '../store/counter';
 
 import classes from './Counter.module.css';
 
 // This component will be recreated every time the counter value in the store changes
 const Counter = () => {
   // This function will be execute for us by react redux
-  const counter = useSelector(state => state.counter);
-  const showCounter = useSelector(state => state.showCounter);
+  const counter = useSelector(state => state.counter.counter);
+  const showCounter = useSelector(state => state.counter.showCounter);
 
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
-    dispatch({ type: 'increment' });
+    dispatch(counterActions.increment());
   };
 
   const increaseHandler = () => {
-    dispatch({ type: 'increase', amount: 5 });
+    // {type: SOME_UNIQUE_IDENTIFIER, payload: 10}
+    dispatch(counterActions.increase(5));
   };
 
   const decrementHandler = () => {
-    dispatch({ type: 'decrement' });
+    dispatch(counterActions.decrement());
   };
 
   const toggleCounterHandler = () => {
-    dispatch({ type: 'toggle' });
+    dispatch(counterActions.toggleCounter());
   };
 
   return (
