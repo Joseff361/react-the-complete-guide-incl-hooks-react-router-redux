@@ -4,24 +4,27 @@ import { cartActions } from '../../store/cart-slice';
 import Card from '../UI/Card';
 import classes from './ProductItem.module.css';
 
-const ProductItem = (props) => {
-  const cart = useSelector((state) => state.cart);
+const ProductItem = props => {
+  const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
   const { title, price, description, id } = props;
 
   const addToCartHandler = () => {
+    // dont update the state outside of a reducer
     const newTotalQuantity = cart.totalQuantity + 1;
 
-    const updatedItems = cart.items.slice(); // create copy via slice to avoid mutating original state
-    const existingItem = updatedItems.find((item) => item.id === id);
+    // create copy via slice to avoid mutating original state
+    const updatedItems = cart.items.slice();
+
+    const existingItem = updatedItems.find(item => item.id === id);
+
     if (existingItem) {
-      const updatedItem = { ...existingItem }; // new object + copy existing properties to avoid state mutation
+      // new object + copy existing properties to avoid state mutation
+      const updatedItem = { ...existingItem };
       updatedItem.quantity++;
       updatedItem.totalPrice = updatedItem.totalPrice + price;
-      const existingItemIndex = updatedItems.findIndex(
-        (item) => item.id === id
-      );
+      const existingItemIndex = updatedItems.findIndex(item => item.id === id);
       updatedItems[existingItemIndex] = updatedItem;
     } else {
       updatedItems.push({

@@ -1,3 +1,24 @@
 {
-  "temp": []
+  "carts": [
+    {
+      "id": 1,
+      "totalQuantity": 12,
+      "items": [
+        {
+          "id": "p1",
+          "price": 6,
+          "quantity": 1,
+          "totalPrice": 6,
+          "name": "My First Book"
+        },
+        {
+          "id": "p2",
+          "price": 5,
+          "quantity": 11,
+          "totalPrice": 55,
+          "name": "My Second Book"
+        }
+      ]
+    }
+  ]
 }
